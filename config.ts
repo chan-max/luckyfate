@@ -19,8 +19,8 @@ export default defineConfig({
     },
 
 
-    brandName: "吸引力法则",
-    tagline: '',
+    brandName: "lucky fate",
+    tagline: 'Your guide to fate, zodiac, and wisdom.',
     apiKey: '',
     apiURL: '',
 

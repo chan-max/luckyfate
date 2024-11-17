@@ -1,8 +1,15 @@
 import config from './config'
 
+import vueJsx from '@vitejs/plugin-vue-jsx';
 export default defineNuxtConfig({
   ssr: false,
   // ssr:true,target:'static',
+  vite: {
+    plugins: [vueJsx()], // 加载 Vue JSX 插件
+  },
+  typescript: {
+    shim: false, // 禁用 shim，提高类型推断能力
+  },
   app: {
     pageTransition: { name: 'page', mode: 'out-in' },
     head: {
@@ -37,12 +44,16 @@ export default defineNuxtConfig({
   },
   devtools: { enabled: true },
   css: ['~/assets/main.scss'],
+  build: {
+    transpile: ['element-plus'], // 确保正确编译 Element Plus
+  },
   modules: [
     '@nuxt/ui',
     '@nuxtjs/sitemap',
     "@nuxt/image",
-    // '@zadigetvoltaire/nuxt-gtm',
-    "@stefanobartoletti/nuxt-social-share"
+    '@ant-design-vue/nuxt',
+    "@stefanobartoletti/nuxt-social-share",
+    '@ant-design-vue/nuxt',
   ],
   // gtm: {
   //   id: config.gtmID,
