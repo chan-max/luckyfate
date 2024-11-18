@@ -54,7 +54,7 @@
 
           <!-- User Avatar or Login -->
           <div>
-            <template v-if="isLoggedIn">
+            <template v-if="loginStore.isLogin">
               <UAvatar
                 size="medium"
                 :src="userAvatar"
@@ -67,7 +67,7 @@
                 class="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded transition"
                 @click="showLoginModal = true"
               >
-                Login 
+                Login
               </button>
             </template>
           </div>
@@ -76,26 +76,53 @@
     </header>
 
     <!-- Login Modal -->
-    <UModal v-model="showLoginModal" title="Login" :closable="true">
-      <div class="p-4 space-y-4">
-        <UInput
-          v-model="username"
-          placeholder="Enter Username"
-          :maxLength="15"
-          :minLength="5"
-          required
-        />
-        <UInput
-          v-model="password"
-          placeholder="Enter Password"
-          type="password"
-          :maxLength="15"
-          :minLength="5"
-          required
-        />
+    <UModal v-model="showLoginModal" title="User Login" :closable="true">
+      <div class="p-6 space-y-6">
+        <!-- Login Title -->
+        <h2 class="text-lg font-bold text-gray-700">Login to Your Account</h2>
+
+        <!-- Username Input -->
+        <div>
+          <label for="username" class="block text-sm font-medium text-gray-600">
+            Username
+          </label>
+          <UInput
+            id="username"
+            v-model="username"
+            placeholder="Enter your username"
+            :maxLength="15"
+            :minLength="5"
+            required
+          />
+        </div>
+
+        <!-- Password Input -->
+        <div>
+          <label for="password" class="block text-sm font-medium text-gray-600">
+            Password
+          </label>
+          <UInput
+            id="password"
+            v-model="password"
+            placeholder="Enter your password"
+            type="password"
+            :maxLength="15"
+            :minLength="5"
+            required
+          />
+        </div>
+
+        <!-- Action Buttons -->
         <div class="flex justify-end space-x-4">
-          <UButton type="default" @click="showLoginModal = false">Cancel</UButton>
-          <UButton type="primary" @click="handleLogin">Login</UButton>
+          <UButton
+            type="danger"
+            class="px-6"
+            @click="showLoginModal = false"
+            variant="link"
+          >
+            Cancel
+          </UButton>
+          <UButton type="primary" class="px-6" @click="handleLogin"> Login </UButton>
         </div>
       </div>
     </UModal>
@@ -105,6 +132,10 @@
 <script setup>
 import { ref } from "vue";
 import { useRouter } from "vue-router";
+import Api from "@/common/axios";
+import { doLoginAction, useLoginStatusStore } from "@/common/store/login";
+
+const loginStore = useLoginStatusStore();
 
 // Tabs Configuration
 const tabs = [
@@ -136,7 +167,7 @@ const navigateTab = (index, tab) => {
 };
 
 // Handle login
-const handleLogin = () => {
+const handleLogin = async () => {
   if (username.value.length < 5 || username.value.length > 15) {
     alert("Username must be 5-15 characters long.");
     return;
@@ -146,8 +177,14 @@ const handleLogin = () => {
     return;
   }
 
+  let res = await Api.login({
+    account: username.value,
+    password: password.value,
+  });
+
+  doLoginAction(res.data);
+
   // Simulate login success
-  isLoggedIn.value = true;
   showLoginModal.value = false;
 };
 </script>

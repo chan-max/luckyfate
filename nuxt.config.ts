@@ -54,6 +54,7 @@ export default defineNuxtConfig({
     '@ant-design-vue/nuxt',
     "@stefanobartoletti/nuxt-social-share",
     '@ant-design-vue/nuxt',
+    '@pinia/nuxt',
   ],
   // gtm: {
   //   id: config.gtmID,
