@@ -1,0 +1,9 @@
+{
+    "tabs": {
+        "fortune": "Fortune Telling",
+        "zodiac": "Zodiac",
+        "elements": "Elements",
+        "calendar": "Calendar",
+        "dreams": "Dreams"
+    }
+}

@@ -1,6 +1,5 @@
 <template>
   <div class="calendar-page">
-    <!-- 控制区 -->
     <div class="controls">
       <a-switch
         v-model:checked="isLunar"
@@ -9,7 +8,6 @@
       />
     </div>
 
-    <!-- 今日宜忌 -->
     <div class="today-info" v-if="selectedDateInfo">
       <h2>今日宜忌</h2>
       <div class="info-container">
@@ -20,7 +18,6 @@
       </div>
     </div>
 
-    <!-- 日历部分 -->
     <div class="calendar-container">
       <a-card>
         <a-calendar
@@ -35,14 +32,11 @@
 
 <script lang="tsx" setup>
 import { ref, watch } from "vue";
-import { Dayjs } from "dayjs";
 import Lunar from "@/common/core/lunar"; // 引入农历库
+import { isLunar, dateCellRender } from "@/common/dateComponent";
 
 // 日历选中的值
-const value = ref<Dayjs>();
-
-// 阳历和阴历切换
-const isLunar = ref(false);
+const value = ref();
 
 // 今日宜忌数据
 const selectedDateInfo = ref<{
@@ -53,7 +47,7 @@ const selectedDateInfo = ref<{
 } | null>(null);
 
 // 获取宜忌数据
-const getYiJi = (date: Dayjs) => {
+const getYiJi = (date) => {
   const lunar = Lunar.fromDate(date.toDate());
   const yi = lunar.getDayYi(); // 宜
   const ji = lunar.getDayJi(); // 忌
@@ -72,26 +66,8 @@ watch(value, (newValue) => {
   }
 });
 
-// 自定义日期单元格内容
-const dateCellRender = (current: Dayjs) => {
-  if (!isLunar.value) {
-    // 显示阳历日期
-    return <div class="custom-date-cell">{current.current.date()}</div>;
-  }
-
-  // 显示阴历日期
-  const lunar = Lunar.fromDate(current.current.toDate());
-  const lunarDay = lunar.getDayInChinese(); // 农历日
-  const lunarMonth = lunar.getMonthInChinese(); // 农历月
-  return (
-    <div class="custom-date-cell">
-      {lunarMonth}月{lunarDay}
-    </div>
-  );
-};
-
 // 面板切换事件
-const onPanelChange = (value: Dayjs, mode: string) => {
+const onPanelChange = (value, mode: string) => {
   console.log(value, mode);
 };
 </script>

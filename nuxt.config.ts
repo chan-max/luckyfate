@@ -55,6 +55,7 @@ export default defineNuxtConfig({
     "@stefanobartoletti/nuxt-social-share",
     '@ant-design-vue/nuxt',
     '@pinia/nuxt',
+    '@nuxtjs/i18n'
   ],
   // gtm: {
   //   id: config.gtmID,
@@ -74,5 +75,11 @@ export default defineNuxtConfig({
   },
   colorMode: {
     preference: 'light'
+  },
+  i18n: {
+    lazy: true, // Enable lazy loading
+    strategy: 'no_prefix', // URL strategy
+    vueI18n: './i18n.config.ts', // Path to Vue I18n configuration
+    locales: ["en", "zh"], //配置语种
   },
 })

@@ -1,0 +1,9 @@
+{
+    "tabs": {
+        "fortune": "算命",
+        "zodiac": "星座",
+        "elements": "五行",
+        "calendar": "黄历",
+        "dreams": "解梦"
+    }
+}

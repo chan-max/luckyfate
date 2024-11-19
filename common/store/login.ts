@@ -1,8 +1,8 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 import { useLocalStorage } from '@vueuse/core';
-import Api from '@/common/axios'
-
+import Api from '@/common/api/axios'
+import { to } from 'await-to-js'
 
 export const doLoginAction = (data: any, once = false) => {
     // 保存登录时间
@@ -44,7 +44,8 @@ export const useLoginStatusStore = defineStore("login_status", () => {
 
     async function getUserInfo() {
         const loginStore = useLoginStatusStore()
-        const _userInfo = await Api.getUserInfo() as any
+        const res = await Api.getUserInfo() as any
+        const _userInfo = res.data
         if (_userInfo) {
             userInfo.value = _userInfo
             loginStore.isAdmin = _userInfo.isAdmin
@@ -74,3 +75,12 @@ export const useLoginStatusStore = defineStore("login_status", () => {
         getUserInfo
     };
 });
+
+
+export async function initLoginStoreUserInfo() {
+    const loginStore = useLoginStatusStore()
+
+    if (loginStore.isLogin) {
+        let [err, res] = await to(loginStore.getUserInfo())
+    }
+}
