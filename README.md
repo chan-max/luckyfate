@@ -1,4 +1,4 @@
-# lucky fate
+# funny word
 
 ## 在线算命
 

@@ -1,13 +1,17 @@
 <template>
   <AConfigProvider :locale="locale == 'zh' ? zhCN : null">
-    <div class="flex flex-col w-full h-full">
+    <div class="flex flex-col w-full h-full" style="background: #080808">
       <!-- Header -->
-      <header
-        class="bg-gradient-to-r from-indigo-500 to-purple-600 text-white py-4 shadow-md"
-      >
+      <header class="text-white py-4 shadow-md">
         <div class="container mx-auto flex justify-between items-center px-4">
           <!-- Logo -->
-          <NuxtLink to="/"> <div class="text-xl font-bold">LuckyFate</div></NuxtLink>
+          <NuxtLink to="/">
+            <img
+              src="/logo.svg"
+              alt="Logo"
+              class="h-8 w-auto pr-2 max-w-[120px] md:max-w-none"
+            />
+          </NuxtLink>
 
           <!-- Navigation -->
           <div class="flex items-center space-x-4">
@@ -57,7 +61,7 @@
               </div>
             </div>
 
-            <UDropdown :items="[langOptions]" :popper="{ placement: 'bottom-end' }">
+            <!-- <UDropdown :items="[langOptions]" :popper="{ placement: 'bottom-end' }">
               <div class="flex items-center mx-2">
                 {{ locale }}
                 <CaretDownOutlined style="margin-top: 4px" />
@@ -68,7 +72,7 @@
                   {{ item.label }}</span
                 >
               </template>
-            </UDropdown>
+            </UDropdown> -->
 
             <!-- User Avatar or Login -->
             <div>
@@ -95,7 +99,7 @@
               </template>
               <template v-else>
                 <button
-                  class="bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-2 rounded transition"
+                  class="bg-custom-500 hover:bg-custom-600 text-white px-4 py-2 rounded transition"
                   @click="showLoginModal = true"
                 >
                   Login
@@ -149,21 +153,19 @@
 
           <!-- Action Buttons -->
           <div class="flex justify-end space-x-4">
-            <UButton color="#6900ff" @click="goSignup" variant="link"> Sign up </UButton>
+            <UButton  class="text-custom-500" @click="goSignup" variant="link"> Sign up </UButton>
 
             <div style="flex: 1"></div>
 
             <UButton
-              type="danger"
-              class="px-6"
+              class="px-6 text-custom-500"
               @click="showLoginModal = false"
               variant="link"
             >
               Cancel
             </UButton>
             <UButton
-              type="primary"
-              class="px-6"
+              class="px-6 bg-custom-500"
               @click="handleLogin"
               :loading="loginLoading"
             >
@@ -229,13 +231,7 @@ const items = [
 ];
 
 // Tabs Configuration
-const tabs = [
-  { label: t("tabs.fortune"), path: "/fortune" },
-  { label: t("tabs.zodiac"), path: "/zodiac" },
-  { label: t("tabs.elements"), path: "/elements" },
-  { label: t("tabs.calendar"), path: "/calendar" },
-  { label: t("tabs.dreams"), path: "/dreams" },
-];
+const tabs = [{ label: "词库", path: "/fortune" }];
 
 // State management
 const showTabsMenu = ref(false); // Mobile tabs dropdown state
