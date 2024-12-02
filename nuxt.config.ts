@@ -25,12 +25,13 @@ export default defineNuxtConfig({
       },
       link: [
         { rel: 'icon', type: 'image/x-icon', href: config.favicon },
-        { rel: 'preconnect', href: 'https://securepubads.g.doubleclick.net' },
-        { rel: 'dns-prefetch', href: 'https://securepubads.g.doubleclick.net' },
-        { rel: 'preload', href: 'https://www.googletagservices.com/tag/js/gpt.js', as: 'script' }
       ],
       script: [
-        { src: 'https://securepubads.g.doubleclick.net/tag/js/gpt.js', async: false, defer: false },
+        {
+          src: '/fullpage.js',
+          type: 'text/javascript',
+          defer: true,
+        }
       ]
     }
   },
@@ -43,7 +44,7 @@ export default defineNuxtConfig({
     },
   },
   devtools: { enabled: true },
-  css: ['~/assets/main.scss'],
+  css: ['~/public/fullpage.css', '~/assets/main.scss', 'animate.css/animate.min.css',],
   build: {
     transpile: ['element-plus'], // 确保正确编译 Element Plus
   },
@@ -53,7 +54,6 @@ export default defineNuxtConfig({
     "@nuxt/image",
     '@ant-design-vue/nuxt',
     "@stefanobartoletti/nuxt-social-share",
-    '@ant-design-vue/nuxt',
     '@pinia/nuxt',
     '@nuxtjs/i18n'
   ],

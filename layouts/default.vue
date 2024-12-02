@@ -1,15 +1,15 @@
 <template>
   <AConfigProvider :locale="locale == 'zh' ? zhCN : null">
-    <div class="flex flex-col w-full h-full" style="background: #080808">
+    <div class="flex flex-col w-full h-full">
       <!-- Header -->
-      <header class="text-white py-4 shadow-md">
+      <header class="text-black py-4 shadow-md">
         <div class="container mx-auto flex justify-between items-center px-4">
           <!-- Logo -->
           <NuxtLink to="/">
             <img
               src="/logo.svg"
               alt="Logo"
-              class="h-8 w-auto pr-2 max-w-[120px] md:max-w-none"
+              class="h-6 w-auto pr-2 max-w-[240px] md:max-w-none"
             />
           </NuxtLink>
 
@@ -21,7 +21,7 @@
                 v-for="(tab, index) in tabs"
                 :key="index"
                 @click="navigateTab(index, tab)"
-                class="text-white hover:text-yellow-300 transition px-4 py-2 rounded-lg text-sm font-medium text-nowrap"
+                class="text-black transition px-4 py-2 rounded-lg text-sm font-medium text-nowrap"
                 :class="[
                   'block w-full text-left px-4 py-2 text-sm',
                   $route.path === tab.path ? 'underline text-custom-200' : '',
@@ -31,50 +31,6 @@
               </button>
             </nav>
 
-            <!-- Dropdown for Mobile -->
-            <div class="relative md:hidden">
-              <button
-                class="p-2 bg-yellow-500 hover:bg-yellow-600 text-white rounded-lg transition"
-                @click="toggleTabsMenu"
-              >
-                ☰
-              </button>
-
-              <div
-                v-if="showTabsMenu"
-                class="absolute top-full mt-2 left-0 w-48 bg-white text-gray-700 shadow-lg rounded-lg z-50"
-              >
-                <ul class="flex flex-col">
-                  <li
-                    v-for="(tab, index) in tabs"
-                    :key="index"
-                    class="hover:bg-gray-200 transition"
-                  >
-                    <button
-                      @click="navigateTab(index, tab)"
-                      class="block w-full text-left px-4 py-2 text-sm"
-                    >
-                      {{ tab.label }}
-                    </button>
-                  </li>
-                </ul>
-              </div>
-            </div>
-
-            <!-- <UDropdown :items="[langOptions]" :popper="{ placement: 'bottom-end' }">
-              <div class="flex items-center mx-2">
-                {{ locale }}
-                <CaretDownOutlined style="margin-top: 4px" />
-              </div>
-
-              <template #item="{ item }">
-                <span @click="langClick(item)" class="w-full text-left">
-                  {{ item.label }}</span
-                >
-              </template>
-            </UDropdown> -->
-
-            <!-- User Avatar or Login -->
             <div>
               <template v-if="loginStore.isLogin">
                 <UDropdown :items="items" :popper="{ placement: 'bottom-end' }">
@@ -153,7 +109,9 @@
 
           <!-- Action Buttons -->
           <div class="flex justify-end space-x-4">
-            <UButton  class="text-custom-500" @click="goSignup" variant="link"> Sign up </UButton>
+            <UButton class="text-custom-500" @click="goSignup" variant="link">
+              Sign up
+            </UButton>
 
             <div style="flex: 1"></div>
 
@@ -231,7 +189,7 @@ const items = [
 ];
 
 // Tabs Configuration
-const tabs = [{ label: "词库", path: "/fortune" }];
+const tabs = [{ label: "", path: "/fortune" }];
 
 // State management
 const showTabsMenu = ref(false); // Mobile tabs dropdown state

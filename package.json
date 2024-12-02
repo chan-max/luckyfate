@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "build": "nuxt build",
-    "dev": "nuxt dev --host 0.0.0.0 --port 1234",
+    "dev": "nuxt dev --host 0.0.0.0 --port 7948",
     "start": "node .output/server/index.mjs",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
@@ -24,6 +24,7 @@
     "@stefanobartoletti/nuxt-social-share": "^0.6.1",
     "@vueuse/core": "^11.2.0",
     "@zadigetvoltaire/nuxt-gtm": "^0.0.13",
+    "animate.css": "^4.1.1",
     "ant-design-vue": "^4.2.6",
     "await-to-js": "^3.0.0",
     "axios": "^1.7.7",
