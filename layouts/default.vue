@@ -21,7 +21,7 @@
                 v-for="(tab, index) in tabs"
                 :key="index"
                 @click="navigateTab(index, tab)"
-                class="text-black transition px-4 py-2 rounded-lg text-sm font-medium text-nowrap"
+                class="text-custom-400 hover:text-black transition px-4 py-2 rounded-lg text-sm font-medium text-nowrap"
                 :class="[
                   'block w-full text-left px-4 py-2 text-sm',
                   $route.path === tab.path ? 'underline text-custom-200' : '',
@@ -189,7 +189,7 @@ const items = [
 ];
 
 // Tabs Configuration
-const tabs = [{ label: "", path: "/fortune" }];
+const tabs = [{ label: "dream", path: "/dream" }];
 
 // State management
 const showTabsMenu = ref(false); // Mobile tabs dropdown state

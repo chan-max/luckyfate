@@ -45,12 +45,9 @@ export const login = (params) => new Promise(async (resolve, reject) => {
 
 export const logout = () => api.post('/api/user/logout')
 
-
 export const signup = (params) => api.post('/api/user/signup', params)
 
-
 export const updateUserInfo = (params) => api.post('/api/user/update', params)
-
 
 export const getUserInfo = () => new Promise(async (resolve, reject) => {
     let res = await api.post('/api/user/getUserInfo')
